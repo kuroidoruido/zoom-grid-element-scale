@@ -1,0 +1,96 @@
+/* CSS CODE FOR ZOOM */
+
+#container {
+  // As I use scss, I define all as sass variable to split computation and style
+  // but you can set everything statically in css
+  $element-small-width: 150px;
+  $element-small-height: 100px;
+  $element-medium-width: 200px;
+  $element-medium-scale: calc($element-medium-width / $element-small-width);
+  $element-medium-height: calc($element-small-height * $element-medium-scale);
+  $element-large-width: 250px;
+  $element-large-scale: calc($element-large-width / $element-small-width);
+  $element-large-height: calc($element-small-height * $element-large-scale);
+
+  // default zoom (small zoom), all be computed from these dimensions
+  .element {
+    width: $element-small-width;
+    height: $element-small-height;
+    .content {
+      width: $element-small-width;
+      height: $element-small-height;
+    }
+  }
+
+  &.zoom-medium {
+    .element {
+      width: $element-medium-width;
+      height: $element-medium-height;
+      .content {
+        transform: scale($element-medium-scale);
+        transform-origin: left top;
+      }
+    }
+  }
+
+  &.zoom-large {
+    .element {
+      width: $element-large-width;
+      height: $element-large-height;
+      .content {
+        transform: scale($element-large-scale);
+        transform-origin: left top;
+      }
+    }
+  }
+}
+
+/* GLOBAL STYLE */
+
+// #region
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+#container {
+  margin: 0 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .element {
+    & .content {
+      border: 2px solid lightgray;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+
+      button {
+        border: none;
+        background: none;
+        padding: 0.25rem;
+        &:hover {
+          background-color: lightblue;
+        }
+        &:active {
+          background-color: lightcoral;
+        }
+      }
+    }
+  }
+}
+
+form {
+  ul {
+    li {
+      list-style-type: none;
+    }
+  }
+}
+
+// #endregion
