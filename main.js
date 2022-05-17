@@ -5,33 +5,27 @@ document.querySelector('#app').innerHTML = `
 <form>
   <ul>
     <li>
-      <label for="small">
-        <input type="radio" name="zoom" value="small" id="small" checked />
-        Small
-      </label>
+      <input type="radio" name="zoom" value="small" id="small" checked />
+      <label for="small">Small</label>
     </li>
     <li>
-      <label for="medium">
-        <input type="radio" name="zoom" value="medium" id="medium" />
-        Medium
-      </label>
+      <input type="radio" name="zoom" value="medium" id="medium" />
+      <label for="medium">Medium</label>
     </li>
     <li>
-      <label for="large">
-        <input type="radio" name="zoom" value="large" id="large" />
-        Large
-      </label>
+      <input type="radio" name="zoom" value="large" id="large" />
+      <label for="large">Large</label>
     </li>
   </ul>
 </form>
 
-<!-- ZOOMED ELEMENTS -->
+<!-- ZOOMED CARDS -->
 
 <div id="container" class="zoom-small">
-  ${range(1, 10)
+  ${range(1, 9)
     .map(
       (elt) => `
-    <div class="element">
+    <div class="card">
       <div class="content">
         Element ${elt}
         <button type="button">Click on the 👻</button>

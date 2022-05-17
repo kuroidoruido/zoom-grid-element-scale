@@ -1,49 +1,90 @@
 /* CSS CODE FOR ZOOM */
 
-#container {
+// to try a solution, just change the #container_ to #container for the one you want to try
+
+/* NAIVE SOLUTION */
+
+#container_ {
   // As I use scss, I define all as sass variable to split computation and style
   // but you can set everything statically in css
-  $element-small-width: 150px;
-  $element-small-height: 100px;
-  $element-medium-width: 200px;
-  $element-medium-scale: calc($element-medium-width / $element-small-width);
-  $element-medium-height: calc($element-small-height * $element-medium-scale);
-  $element-large-width: 250px;
-  $element-large-scale: calc($element-large-width / $element-small-width);
-  $element-large-height: calc($element-small-height * $element-large-scale);
+  $card-small-width: 150px;
+  $card-small-height: 100px;
+  $card-medium-width: 200px;
+  $card-medium-scale: calc($card-medium-width / $card-small-width);
+  $card-large-width: 250px;
+  $card-large-scale: calc($card-large-width / $card-small-width);
 
   // default zoom (small zoom), all be computed from these dimensions
-  .element {
-    width: $element-small-width;
-    height: $element-small-height;
+  .card {
+    width: $card-small-width;
+    height: $card-small-height;
     .content {
-      width: $element-small-width;
-      height: $element-small-height;
+      width: 100%;
+      height: 100%;
     }
   }
 
   &.zoom-medium {
-    .element {
-      width: $element-medium-width;
-      height: $element-medium-height;
+    .card {
+      transform: scale($card-medium-scale);
+    }
+  }
+
+  &.zoom-large {
+    .card {
+      transform: scale($card-large-scale);
+    }
+  }
+}
+
+/* SOLUTION */
+// #region
+
+#container {
+  // As I use scss, I define all as sass variable to split computation and style
+  // but you can set everything statically in css
+  $card-small-width: 150px;
+  $card-small-height: 100px;
+  $card-medium-width: 200px;
+  $card-medium-scale: calc($card-medium-width / $card-small-width);
+  $card-medium-height: calc($card-small-height * $card-medium-scale);
+  $card-large-width: 250px;
+  $card-large-scale: calc($card-large-width / $card-small-width);
+  $card-large-height: calc($card-small-height * $card-large-scale);
+
+  // default zoom (small zoom), all be computed from these dimensions
+  .card {
+    width: $card-small-width;
+    height: $card-small-height;
+    .content {
+      width: $card-small-width;
+      height: $card-small-height;
+    }
+  }
+
+  &.zoom-medium {
+    .card {
+      width: $card-medium-width;
+      height: $card-medium-height;
       .content {
-        transform: scale($element-medium-scale);
+        transform: scale($card-medium-scale);
         transform-origin: left top;
       }
     }
   }
 
   &.zoom-large {
-    .element {
-      width: $element-large-width;
-      height: $element-large-height;
+    .card {
+      width: $card-large-width;
+      height: $card-large-height;
       .content {
-        transform: scale($element-large-scale);
+        transform: scale($card-large-scale);
         transform-origin: left top;
       }
     }
   }
 }
+// #endregion
 
 /* GLOBAL STYLE */
 
@@ -63,9 +104,10 @@
   flex-wrap: wrap;
   gap: 20px;
 
-  .element {
+  .card {
     & .content {
       border: 2px solid lightgray;
+      background-color: #a0a0a020;
       border-radius: 0.5rem;
       padding: 0.5rem;
       box-sizing: border-box;
@@ -87,8 +129,10 @@
 
 form {
   ul {
+    display: flex;
     li {
       list-style-type: none;
+      margin-left: 2rem;
     }
   }
 }
